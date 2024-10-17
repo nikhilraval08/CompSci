@@ -2,14 +2,12 @@
 #Description- a program to optimize the productivity of the GCDS Post Office, program to determine mail type and cost to send
 #Bugs- none
 #Features- allows users to determine the individual cost of as many parcels as they want
-#Log- 1.0.0- submission
+#Log- 1.0.0- submission, 1.0.1- resubmission
 
 
-def main():
-    print ("Welcome to the GCDS Post Office!")                                                                                                                          #welcomes user to the program           
+def main():                                                                                                                          #welcomes user to the program           
     details = input ("Please enter your parcel info. To stop, type stop. (Please Seperate length, height, thickness, ZIP from, ZIP to, using commas): ")                #prompts user to enter parcel information  
     if details == ("stop"):                                                                                                                                             #lines 11-13 = command to end the program
-        print ("Thanks for stopping by.")
         exit()                                                                                                          
     try:                                                                                                                                                                
         information = details.split(",")                                                                                                                                #seperates the data using "," as the delimeter, makes each data correspond to an index in a list (lines 16-20)
@@ -22,7 +20,7 @@ def main():
         mail_type = get_post_type(length, height, thickness)                                                                                                            #gets the mail type from the function get_mail_type (lines 41-71)
         zone_info = abs(get_zone(zip_to) - get_zone(zip_from))                                                                                                          #calculation to figure out zone distance, takes the absolute value of that number
         cost = get_price(mail_type, zone_info)                                                                                                                          #calculates the final cost to send parcel
-        print("The cost is: " + str(cost))                                                                                                                              #prints the final calculation 
+        print ("{:.2f}".format(cost).lstrip('0'))                                                                                                                              #prints the final calculation 
         print ("_________________________________________________________")                                                                                             
         main()                                                                                                                                                          #program restarts to add more parcels
     
