@@ -1,0 +1,109 @@
+-- FIND ALL WINNING PHOTOGRAPHS WHERE DEATH IS EXPLICITLY PRESENT
+SELECT PresDeathVal, PresDeath, AwardOrg, ImageYr, AwardDiv, PhotographerGen, PhotographerRace, PhotographerPoC, 
+PhotographerNat, AssStat, SubGen, SubRace, SubNat, SubLoc, ShotAngle, ShotType, ImageClr, ImageOrient, 
+PresDis, PresPolit, PresWar, PresPov, PresIll, PresNud, PresChil, PresIncar, PresRefu, 
+PresViol, PresPolice, PresMil, Affect 
+
+FROM Award_Data
+
+WHERE PresDeathVal = 1;
+
+-- ORDER BY SHOT TYPE
+SELECT ShotTypeVal, ShotType, AwardOrg, ImageYr, AwardDiv, PhotographerGen, PhotographerRace, PhotographerPoC, 
+PhotographerNat, AssStat, SubGen, SubRace, SubNat, SubLoc, ShotAngle, ImageClr, ImageOrient, 
+PresDeath, PresDis, PresPolit, PresWar, PresPov, PresIll, PresNud, PresChil, PresIncar, PresRefu, 
+PresViol, PresPolice, PresMil, Affect 
+FROM Award_Data
+ORDER BY ShotTypeVal;
+
+-- FIND ALL WINNING PHOTOS SHOT BY A FREELANCER, SORTED BY YEAR
+SELECT AssStatVal, AssStat, AwardOrg, ImageYr, AwardDiv, PhotographerGen, PhotographerRace, PhotographerPoC, 
+PhotographerNat, SubGen, SubRace, SubNat, SubLoc, ShotAngle, ShotType, ImageClr, ImageOrient, 
+PresDeath, PresDis, PresPolit, PresWar, PresPov, PresIll, PresNud, PresChil, PresIncar, PresRefu, 
+PresViol, PresPolice, PresMil, Affect 
+
+FROM Award_Data
+
+WHERE AssStatVal = 2 ORDER BY ImageYr;
+
+-- ORDER BY PHOTOGRAPHER'S RACE AND PERSON OF COLOR STATUS
+SELECT PhotographerRaceVal, PhotographerRace, PhotographerNat, PhotographerPoCVal, PhotographerPoC, AwardOrg, 
+ImageYr, AwardDiv, PhotographerGen, AssStat, SubGen, SubRace, SubNat, SubLoc, ShotAngle, ShotType, ImageClr, 
+ImageOrient, PresDeath, PresDis, PresPolit, PresWar, PresPov, PresIll, PresNud, PresChil, PresIncar, PresRefu, 
+PresViol, PresPolice, PresMil, Affect 
+
+FROM Award_Data
+
+ORDER BY PhotographerRaceVal, PhotographerPoCVal;
+
+-- WHAT SUBJECT TYPE HAS WON THE MOST AWARDS?
+SELECT SubGen, COUNT(*) AS SubjectCount
+
+FROM Award_Data
+
+GROUP BY SubGen
+ORDER BY SubjectCount DESC;
+
+-- WHAT IS THE MOST POPULAR GENDER OF THE WINNING PHOTOGRAPHERS?
+SELECT PhotographerGen, COUNT(*) AS GenderCount
+
+FROM Award_Data
+
+GROUP BY PhotographerGen
+ORDER BY GenderCount DESC;
+
+-- WHERE ARE THE PHOTOGRAPHERS FROM?
+SELECT PhotographerNat, COUNT(*) AS PhotographerNationalityCount
+
+FROM Award_Data
+
+GROUP BY PhotographerNat
+ORDER BY PhotographerNationalityCount DESC;
+
+-- WHAT IS THE RACIAL DEMOGRAPHIC AMONG THE PHOTOGRAPHERS?
+SELECT PhotographerRace, COUNT(*) AS PhotographerRaceCount
+
+FROM Award_Data
+
+GROUP BY PhotographerRace
+ORDER BY PhotographerRaceCount DESC;
+
+-- WHAT IS THE RACIAL DEMOGRAPHIC AMONG THE SUBJECTS?
+SELECT SubRace, COUNT(*) AS SubRaceCount
+
+FROM Award_Data
+
+GROUP BY SubRace
+ORDER BY SubRaceCount DESC;
+
+-- WHAT IS THE MOST COMMON LOCATION OF THE SUBJECTS?
+SELECT SubLoc, COUNT(*) AS SubLocationCount
+
+FROM Award_Data
+
+GROUP BY SubLoc
+ORDER BY SubLocationCount DESC;
+
+-- ARE THE PHOTOGRAPHS BLACK AND WHITE OR COLOR?
+SELECT ImageClr, COUNT(*) AS ImageColorCount
+
+FROM Award_Data
+
+GROUP BY ImageClr
+ORDER BY ImageColorCount DESC;
+
+-- DO THE PHOTOGRAPHS AFFECT THE VIEWER?
+SELECT Affect, COUNT(*) AS ViewerAffectCount
+
+FROM Award_Data
+
+GROUP BY Affect
+ORDER BY ViewerAffectCount DESC;
+
+-- ARE THE PHOTOGRAPHERS STAFF MEMBERS OR FREELANCERS?
+SELECT AssStat, COUNT(*) AS AssignmentStatusCount
+
+FROM Award_Data
+
+GROUP BY AssStat
+ORDER BY AssignmentStatusCount DESC;
